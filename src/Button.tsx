@@ -1,10 +1,10 @@
 import React from 'react';
 
 type ButtonPropsType = {
-    title : string
+    title: string
 }
 
-const Button = (props:ButtonPropsType) => {
+const Button = (props: ButtonPropsType) => {
     return (
         <button>{props.title}</button>
     )
