@@ -22,7 +22,7 @@ const TodoList = (props: TodoListPropsType) => {
 
             <TasksList
                 tasks={props.tasks}
-                removeTasks={props.removeTasks}
+                removeTask={props.removeTasks}
             />
 
             <div>
