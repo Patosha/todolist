@@ -3,7 +3,7 @@ import {TaskType} from "./App";
 
 type TaskListPropsType = {
     tasks: Array<TaskType>
-    removeTask: (id: number) => void
+    removeTask: (id: string) => void
 }
 
 const TasksList = (props: TaskListPropsType) => {

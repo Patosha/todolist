@@ -1,12 +1,14 @@
 import React from 'react';
+import {FilterValuesType} from "./App";
 
 type ButtonPropsType = {
     title: string
+    changeFilter: () => void
 }
 
 const Button = (props: ButtonPropsType) => {
     return (
-        <button>{props.title}</button>
+        <button onClick={props.changeFilter}>{props.title}</button>
     )
 };
 

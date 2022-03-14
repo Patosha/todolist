@@ -1,12 +1,15 @@
 import React, {useState} from 'react';
 import './App.css';
 import TodoList from "./TodoList";
+import {v1} from "uuid"; // генерация случайного числа
 
 export type  TaskType = {
-    id: number
+    id: string
     title: string
     isDone: boolean
 }
+
+export type FilterValuesType = 'all' | 'active' | 'completed'
 
 function App() {
 //BLL:
@@ -14,15 +17,42 @@ function App() {
 
     const [tasks, setTasks] =
         useState([
-                {id: 1, title: "HTML&CSS", isDone: true},
-                {id: 2, title: "JS", isDone: true},
-                {id: 3, title: "React", isDone: false},
+                {id: v1(), title: "HTML&CSS", isDone: true},
+                {id: v1(), title: "JS", isDone: true},
+                {id: v1(), title: "React", isDone: false},
             ]
         )
 
-    const removeTask = (id: number) => {
+    const [filter, setFilter] = useState<FilterValuesType>('all')
+
+    const changeFilter = (filter: FilterValuesType) => {
+        setFilter(filter)
+    }
+
+    let tasksForTodoList;
+    switch (filter) {
+        case 'active':
+            tasksForTodoList = tasks.filter(t => !t.isDone)
+            break
+        case 'completed':
+            tasksForTodoList = tasks.filter(t => t.isDone)
+            break
+        default:
+            tasksForTodoList = tasks
+    }
+
+    const removeTask = (id: string) => {
         const filteredTasks = tasks.filter(t => t.id !== id)
         setTasks(filteredTasks)
+    }
+    const addTask = (title: string) => {
+        const newTask: TaskType = {
+            id: v1(),
+            title,
+            isDone: false
+        }
+
+        setTasks([newTask, ...tasks])
     }
 
 //UI:
@@ -30,8 +60,10 @@ function App() {
         <div className="App">
             <TodoList
                 title={todoListTitle_1}
-                tasks={tasks}
+                tasks={tasksForTodoList}
                 removeTasks={removeTask}
+                addTask={addTask}
+                changeFilter={changeFilter}
             />
         </div>
     );

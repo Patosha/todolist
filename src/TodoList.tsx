@@ -1,5 +1,5 @@
-import React from 'react';
-import {TaskType} from "./App";
+import React, {useState} from 'react';
+import {FilterValuesType, TaskType} from "./App";
 import TodoListHeader from "./TodoListHeader";
 import Button from "./Button";
 import TasksList from "./TasksList";
@@ -7,17 +7,43 @@ import TasksList from "./TasksList";
 type TodoListPropsType = {
     title: string
     tasks: Array<TaskType>
-    removeTasks: (id: number) => void
+    removeTasks: (id: string) => void
+    addTask: (title: string) => void
+    changeFilter: (filter: FilterValuesType) => void
 }
 
 const TodoList = (props: TodoListPropsType) => {
+
+    const [title, setTitle] = useState<string>('')
+    const addTask = () => {
+        props.addTask(title)
+        setTitle('')
+    }
+
+    //const onKeyPressAddTask
+
     return (
         <div>
             <TodoListHeader title={props.title}/>
 
             <div>
-                <input/>
-                <button>+</button>
+
+                <input
+                    value={title}
+                    onChange={(e) => setTitle(e.currentTarget.value)}
+                    //клавиатура
+                    onKeyPress={(e) => {
+                        if (e.key === 'Enter') {
+                            addTask()
+                        }
+
+                    }
+                    }
+                />
+
+                {/*<button title={'+'} onClick={addTask}/>*/}
+
+                <Button title={'+'} changeFilter={addTask}/>
             </div>
 
             <TasksList
@@ -26,9 +52,18 @@ const TodoList = (props: TodoListPropsType) => {
             />
 
             <div>
-                <Button title={"All"}/>
-                <Button title={"Active"}/>
-                <Button title={"Completed"}/>
+                <Button
+                    changeFilter={() => props.changeFilter('all')}
+                    title={"All"}
+                />
+                <Button
+                    changeFilter={() => props.changeFilter('active')}
+                    title={"Active"}
+                />
+                <Button
+                    changeFilter={() => props.changeFilter('completed')}
+                    title={"Completed"}
+                />
             </div>
         </div>
     );
