@@ -55,15 +55,21 @@ function App() {
         setTasks([newTask, ...tasks])
     }
 
+    const changeStatus = (id: string, newIsDoneValue: boolean) => {
+        setTasks(tasks.map(t => t.id === id ? {...t, isDone: newIsDoneValue} : t))
+    }
+
 //UI:
     return (
         <div className="App">
             <TodoList
                 title={todoListTitle_1}
+                filter={filter}
                 tasks={tasksForTodoList}
                 removeTasks={removeTask}
                 addTask={addTask}
                 changeFilter={changeFilter}
+                changeStatus={changeStatus}
             />
         </div>
     );

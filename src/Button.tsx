@@ -4,11 +4,15 @@ import {FilterValuesType} from "./App";
 type ButtonPropsType = {
     title: string
     changeFilter: () => void
+    btnClass?: string
 }
 
 const Button = (props: ButtonPropsType) => {
     return (
-        <button onClick={props.changeFilter}>{props.title}</button>
+        <button
+            className={props.btnClass}
+            onClick={props.changeFilter}>{props.title}
+        </button>
     )
 };
 

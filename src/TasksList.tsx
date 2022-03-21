@@ -4,6 +4,7 @@ import {TaskType} from "./App";
 type TaskListPropsType = {
     tasks: Array<TaskType>
     removeTask: (id: string) => void
+    changeStatus: (id: string, isDone: boolean) => void
 }
 
 const TasksList = (props: TaskListPropsType) => {
@@ -16,9 +17,14 @@ const TasksList = (props: TaskListPropsType) => {
         <ul>
             {
                 props.tasks.map((t) => {
-                    return <li key={t.id}>
-                        <input type="checkbox" checked={t.isDone}/>
+                    return <li key={t.id} className={t.isDone ? 'isDone' : ''}>
+                        <input type="checkbox" checked={t.isDone}
+                               onChange={(e) =>
+                                   props.changeStatus(t.id, e.currentTarget.checked)}
+                        />
+
                         <span>{t.title}</span>
+
                         <button onClick={() => {
                             props.removeTask(t.id)
                         }}>

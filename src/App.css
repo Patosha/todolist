@@ -1,8 +1,26 @@
 .App {
-  padding: 30px;
-  display: flex;
+    padding: 30px;
+    display: flex;
 }
 
 .App > div {
-  margin-right: 50px;
+    margin-right: 50px;
+}
+
+.error {
+    border: red 3px solid;
+}
+
+.error-message {
+    color: red;
+}
+
+.btnActive {
+    background-color: brown;
+    color: aliceblue;
+    font-weight: bold;
+}
+
+.isDone {
+    text-decoration: line-through;
 }
