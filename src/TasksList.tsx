@@ -3,7 +3,7 @@ import {TaskType} from "./App";
 
 type TaskListPropsType = {
     tasks: Array<TaskType>
-    removeTask: (id: string) => void
+    removeTask: (todolistID: string, id: string) => void
     changeStatus: (id: string, isDone: boolean) => void
 }
 
@@ -25,10 +25,9 @@ const TasksList = (props: TaskListPropsType) => {
 
                         <span>{t.title}</span>
 
-                        <button onClick={() => {
-                            props.removeTask(t.id)
+                        <button onClick={() => {props.removeTask(t.id)
                         }}>
-                            x
+                            X
                         </button>
                     </li>
                 })
