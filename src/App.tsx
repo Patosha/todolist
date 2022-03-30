@@ -1,13 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
-import TodoList from "./TodoList";
+import TodoList, {TaskType} from "./TodoList";
 import {v1} from "uuid"; // генерация случайного числа
-
-export type  TaskType = {
-    id: string
-    title: string
-    isDone: boolean
-}
 
 export type TodolistsType = {
     id: string
@@ -90,11 +84,12 @@ function App() {
             isDone: false
         }
 
-        setTasks({...tasks, [todolistID]: [newTask, ...]})
+        setTasks({...tasks, [todolistID]: [newTask, ...tasks[todolistID]]})
     }
 
-    const changeStatus = (id: string, newIsDoneValue: boolean) => {
-        setTasks(tasks.map(t => t.id === id ? {...t, isDone: newIsDoneValue} : t))
+    const changeStatus = (todolistID: string, taskId: string, newIsDoneValue: boolean) => {
+        setTasks({...tasks, [todolistID]: tasks[todolistID].map(el => el.id === taskId ? {...el, isDone: newIsDoneValue} : el)})
+        // setTasks(tasks.map(t => t.id === id ? {...t, isDone: newIsDoneValue} : t))
     }
 
 //UI:

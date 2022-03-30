@@ -1,10 +1,12 @@
 import React from 'react';
-import {TaskType} from "./App";
+import {TaskType} from "./TodoList";
+
 
 type TaskListPropsType = {
     tasks: Array<TaskType>
     removeTask: (todolistID: string, id: string) => void
-    changeStatus: (id: string, isDone: boolean) => void
+    changeStatus: (todolistID: string, id: string, isDone: boolean) => void
+    todolistID: string
 }
 
 const TasksList = (props: TaskListPropsType) => {
@@ -17,19 +19,22 @@ const TasksList = (props: TaskListPropsType) => {
         <ul>
             {
                 props.tasks.map((t) => {
-                    return <li key={t.id} className={t.isDone ? 'isDone' : ''}>
-                        <input type="checkbox" checked={t.isDone}
-                               onChange={(e) =>
-                                   props.changeStatus(t.id, e.currentTarget.checked)}
-                        />
+                    return (
+                        <li key={t.id} className={t.isDone ? 'isDone' : ''}>
+                            <input type="checkbox" checked={t.isDone}
+                                   onChange={(e) =>
+                                       props.changeStatus(props.todolistID, t.id, e.currentTarget.checked)}
+                            />
 
-                        <span>{t.title}</span>
+                            <span>{t.title}</span>
 
-                        <button onClick={() => {props.removeTask(t.id)
-                        }}>
-                            X
-                        </button>
-                    </li>
+                            <button onClick={() => {
+                                props.removeTask(props.todolistID, t.id)
+                            }}>
+                                X
+                            </button>
+                        </li>
+                    )
                 })
             }
         </ul>

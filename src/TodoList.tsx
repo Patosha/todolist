@@ -1,11 +1,16 @@
 import React, {useState} from 'react';
-import {FilterValuesType, TaskType} from "./App";
+import {FilterValuesType} from "./App";
 import TodoListHeader from "./TodoListHeader";
 import Button from "./Button";
 import TasksList from "./TasksList";
-import todoList from "./TodoList";
 
-type TodoListPropsType = {
+export type  TaskType = {
+    id: string
+    title: string
+    isDone: boolean
+}
+
+export type TodoListPropsType = {
     todolistId: string
     title: string
     filter: FilterValuesType
@@ -13,7 +18,7 @@ type TodoListPropsType = {
     removeTasks: (todolistID: string, id: string) => void
     addTask: (todolistID: string, title: string) => void
     changeFilter: (todolistId: string, filter: FilterValuesType) => void
-    changeStatus: (id: string, isDone: boolean) => void
+    changeStatus: (todolistID: string, id: string, isDone: boolean) => void
 }
 
 const TodoList = (props: TodoListPropsType) => {
@@ -25,7 +30,7 @@ const TodoList = (props: TodoListPropsType) => {
     const addTask = () => {
         const trimmedTitle = title.trim()
         if (trimmedTitle) {
-            props.addTask(props.todolistId,trimmedTitle)
+            props.addTask(props.todolistId, trimmedTitle)
             setTitle('')
         } else {
             setError(true)
@@ -64,6 +69,7 @@ const TodoList = (props: TodoListPropsType) => {
                 tasks={props.tasks}
                 removeTask={props.removeTasks}
                 changeStatus={props.changeStatus}
+                todolistID={props.todolistId}
             />
 
             <div>
