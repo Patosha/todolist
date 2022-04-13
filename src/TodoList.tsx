@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {FilterValuesType} from "./App";
 import TodoListHeader from "./TodoListHeader";
 import Button from "./Button";
 import TasksList from "./TasksList";
+import {AddItemForm} from "./components/AddItemForm";
 
 export type  TaskType = {
     id: string
@@ -24,51 +25,55 @@ export type TodoListPropsType = {
 
 const TodoList = (props: TodoListPropsType) => {
 
-    const [title, setTitle] = useState<string>('')
+    // const [title, setTitle] = useState<string>('')
+    //
+    // const [error, setError] = useState<boolean>(false)
 
-    const [error, setError] = useState<boolean>(false)
-
-    const addTask = () => {
-        const trimmedTitle = title.trim()
-        if (trimmedTitle) {
-            props.addTask(props.todolistId, trimmedTitle)
-            setTitle('')
-        } else {
-            setError(true)
-        }
-    }
+    // const addTask = () => {
+    //     const trimmedTitle = title.trim()
+    //     if (trimmedTitle) {
+    //         props.addTask(props.todolistId, trimmedTitle)
+    //         setTitle('')
+    //     } else {
+    //         setError(true)
+    //     }
+    // }
 
     return (
         <div>
+
             <TodoListHeader
                 title={props.title}
                 removeTodolist={props.removeTodolist}
                 todolistID={props.todolistId}
             />
 
-            <div>
+            <AddItemForm
+                addTask={addTask}
+                todolistId={todolistId}
+            />
 
-                <input className={error ? 'error' : ''}
-                       value={title}
-                       onChange={(e) => {
-                           setTitle(e.currentTarget.value)
-                           setError(false)
-                       }}
-                    //клава
-                       onKeyPress={(e) => {
-                           if (e.key === 'Enter') {
-                               addTask()
-                           }
+            {/*<div>*/}
 
-                       }
-                       }
-                />
+            {/*    <input className={error ? 'error' : ''}*/}
+            {/*           value={title}*/}
+            {/*           onChange={(e) => {*/}
+            {/*               setTitle(e.currentTarget.value)*/}
+            {/*               setError(false)*/}
+            {/*           }}*/}
+            {/*        //клава*/}
+            {/*           onKeyPress={(e) => {*/}
+            {/*               if (e.key === 'Enter') {*/}
+            {/*                   addTask()*/}
+            {/*               }*/}
 
-                {/*<button title={'+'} onClick={addTask}/>*/}
+            {/*           }*/}
+            {/*           }*/}
+            {/*    />*/}
 
-                <Button title={'+'} changeFilter={addTask}/>
-                {error && <div className={'error-message'}>Title is required!</div>}
-            </div>
+            {/*    <Button title={'+'} changeFilter={addTask}/>*/}
+            {/*    {error && <div className={'error-message'}>Title is required!</div>}*/}
+            {/*</div>*/}
 
             <TasksList
                 tasks={props.tasks}
