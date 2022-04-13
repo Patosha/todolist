@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import './App.css';
 import TodoList, {TaskType} from "./TodoList";
-import {v1} from "uuid"; // генерация случайного числа
+import {v1} from "uuid";
+import {AddItemForm} from "./components/AddItemForm"; // генерация случайного числа
 
 export type TodolistsType = {
     id: string
@@ -42,7 +43,6 @@ function App() {
         ]
     });
 
-
     const changeFilter = (todolistId: string, filter: FilterValuesType) => {
         setTodolists(todolists.map((el) => el.id === todolistId ? {...el, filter: filter} : el))
     }
@@ -67,6 +67,12 @@ function App() {
         setTasks({...tasks, [todolistID]: [newTask, ...tasks[todolistID]]})
     }
 
+    const addTodoList = () => {
+        const newId = v1()
+        const newTodoList: TodolistsType = {id: newId, title: 'What to buy', filter: 'all'}
+        setTodolists([newTodoList, ...todolists])
+    }
+
     const changeStatus = (todolistID: string, taskId: string, newIsDoneValue: boolean) => {
         setTasks({
             ...tasks,
@@ -78,6 +84,10 @@ function App() {
 //UI:
     return (
         <div className="App">
+
+            <AddItemForm
+                callBack={addTodoList}
+            />
 
             {todolists.map((el) => {
 

@@ -2,18 +2,19 @@ import Button from "../Button";
 import React, {useState} from "react";
 
 type AddItemFormPropsType = {
-    todolistId: string
-    addTask: (todolistID: string, title: string) => void
+    callBack: (title: string) => void
 }
 
 export const AddItemForm = (props: AddItemFormPropsType) => {
+
     const [title, setTitle] = useState<string>('')
     const [error, setError] = useState<boolean>(false)
 
     const addTask = () => {
         const trimmedTitle = title.trim()
         if (trimmedTitle) {
-            props.addTask(props.todolistId, trimmedTitle)
+            props.callBack(trimmedTitle)
+            // props.callBack(trimmedTitle)
             setTitle('')
         } else {
             setError(true)

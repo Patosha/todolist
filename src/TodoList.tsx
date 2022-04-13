@@ -25,19 +25,19 @@ export type TodoListPropsType = {
 
 const TodoList = (props: TodoListPropsType) => {
 
-    // const [title, setTitle] = useState<string>('')
-    //
-    // const [error, setError] = useState<boolean>(false)
+    const onAllClickHandler = () => {
+        props.changeFilter(props.todolistId, 'all')
+    }
+    const onActiveClickHandler = () => {
+        props.changeFilter(props.todolistId, 'active')
+    }
+    const onCompletedClickHandler = () => {
+        props.changeFilter(props.todolistId, 'completed')
+    }
 
-    // const addTask = () => {
-    //     const trimmedTitle = title.trim()
-    //     if (trimmedTitle) {
-    //         props.addTask(props.todolistId, trimmedTitle)
-    //         setTitle('')
-    //     } else {
-    //         setError(true)
-    //     }
-    // }
+    const addTaskHandler = (title: string) => {
+        props.addTask(title, props.todolistId)
+    }
 
     return (
         <div>
@@ -49,31 +49,8 @@ const TodoList = (props: TodoListPropsType) => {
             />
 
             <AddItemForm
-                addTask={addTask}
-                todolistId={todolistId}
+                callBack={addTaskHandler}
             />
-
-            {/*<div>*/}
-
-            {/*    <input className={error ? 'error' : ''}*/}
-            {/*           value={title}*/}
-            {/*           onChange={(e) => {*/}
-            {/*               setTitle(e.currentTarget.value)*/}
-            {/*               setError(false)*/}
-            {/*           }}*/}
-            {/*        //клава*/}
-            {/*           onKeyPress={(e) => {*/}
-            {/*               if (e.key === 'Enter') {*/}
-            {/*                   addTask()*/}
-            {/*               }*/}
-
-            {/*           }*/}
-            {/*           }*/}
-            {/*    />*/}
-
-            {/*    <Button title={'+'} changeFilter={addTask}/>*/}
-            {/*    {error && <div className={'error-message'}>Title is required!</div>}*/}
-            {/*</div>*/}
 
             <TasksList
                 tasks={props.tasks}
@@ -85,17 +62,17 @@ const TodoList = (props: TodoListPropsType) => {
             <div>
                 <Button
                     btnClass={props.filter === 'all' ? 'btnActive' : ''}
-                    changeFilter={() => props.changeFilter(props.todolistId, 'all')}
+                    changeFilter={onAllClickHandler}
                     title={"All"}
                 />
                 <Button
                     btnClass={props.filter === 'active' ? 'btnActive' : ''}
-                    changeFilter={() => props.changeFilter(props.todolistId, 'active')}
+                    changeFilter={onActiveClickHandler}
                     title={"Active"}
                 />
                 <Button
                     btnClass={props.filter === 'completed' ? 'btnActive' : ''}
-                    changeFilter={() => props.changeFilter(props.todolistId, 'completed')}
+                    changeFilter={onCompletedClickHandler}
                     title={"Completed"}
                 />
             </div>
