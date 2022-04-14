@@ -7,6 +7,7 @@ type TaskListPropsType = {
     removeTask: (todolistID: string, id: string) => void
     changeStatus: (todolistID: string, id: string, isDone: boolean) => void
     id: string
+    updateTask: (todolistId: string, tasksId: string, newTitle: string) => void
 }
 
 const TasksList = (props: TaskListPropsType) => {
@@ -14,6 +15,10 @@ const TasksList = (props: TaskListPropsType) => {
     // const {tasks, names} = props
     // const tasks = props.tasks
     // const names = props.names
+
+    const updateTaskHandler = (taskId: string, newTitle: string) => {
+        props.updateTask(props.id, taskId, newTitle)
+    }
 
     return (
         <ul>
@@ -26,10 +31,9 @@ const TasksList = (props: TaskListPropsType) => {
                                        props.changeStatus(props.id, t.id, e.currentTarget.checked)}
                             />
 
-                            {/*<span>{t.title}</span>*/}
-
                             <EditableSpan
                                 title={t.title}
+                                callBack={(newTitle: string) => updateTaskHandler(t.id, newTitle)}
                             />
 
                             <button onClick={() => {

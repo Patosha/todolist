@@ -1,11 +1,19 @@
-import React, {useState} from "react";
+import React, {ChangeEvent, useState} from "react";
 
 type EditableSpanPropsType = {
     title: string
+    callBack: (newTitle: string) => void
 }
 
 export const EditableSpan = (props: EditableSpanPropsType) => {
-    let [edit, setEdit] = useState(false)
+
+    const [newTitle, setNewTitle] = useState<string>(props.title)
+
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setNewTitle(e.currentTarget.value)
+    }
+
+    const [edit, setEdit] = useState(false)
 
     const turnOnHandler = () => {
         setEdit(true)
@@ -13,11 +21,12 @@ export const EditableSpan = (props: EditableSpanPropsType) => {
 
     const turnOffHandler = () => {
         setEdit(false)
+        props.callBack(newTitle)
     }
 
     return (
         edit
-            ? <input autoFocus onBlur={turnOffHandler} value={props.title}/>
+            ? <input autoFocus onBlur={turnOffHandler} onChange={onChangeHandler} value={newTitle}/>
             : <span onDoubleClick={turnOnHandler}>{props.title}</span>
     )
 }
