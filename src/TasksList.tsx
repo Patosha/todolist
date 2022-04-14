@@ -1,5 +1,6 @@
 import React from 'react';
 import {TaskType} from "./TodoList";
+import {EditableSpan} from "./components/EditableSpan";
 
 type TaskListPropsType = {
     tasks: Array<TaskType>
@@ -25,7 +26,11 @@ const TasksList = (props: TaskListPropsType) => {
                                        props.changeStatus(props.id, t.id, e.currentTarget.checked)}
                             />
 
-                            <span>{t.title}</span>
+                            {/*<span>{t.title}</span>*/}
+
+                            <EditableSpan
+                                title={t.title}
+                            />
 
                             <button onClick={() => {
                                 props.removeTask(props.id, t.id)
