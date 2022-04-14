@@ -1,9 +1,11 @@
 import React from 'react';
+import {EditableSpan} from "./components/EditableSpan";
 
 type TodoListHeaderPropsType = {
     title: string
-    removeTodolist: (todolistID: string) => void
     id: string
+    removeTodolist: (todolistID: string) => void
+    updateTodolistTitle: (todolistId: string, newTitle: string) => void
 }
 
 const TodoListHeader = (props: TodoListHeaderPropsType) => {
@@ -12,9 +14,17 @@ const TodoListHeader = (props: TodoListHeaderPropsType) => {
         props.removeTodolist(props.id)
     }
 
+    const editableSpanForH3Handler = (newTitle: string) => {
+        props.updateTodolistTitle(props.id, newTitle)
+    }
+
     return (
         <h3>
-            {props.title}
+            <EditableSpan
+                title={props.title}
+                callBack={editableSpanForH3Handler}
+            />
+            {/*{props.title}*/}
 
             <button onClick={removeTodolistHandler}>
                 X

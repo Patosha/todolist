@@ -23,6 +23,7 @@ export type TodoListPropsType = {
     removeTodolist: (todolistID: string) => void
     updateTask: (todolistId: string, tasksId: string, newTitle: string) => void
     id: string
+    updateTodolistTitle: (todolistId: string, newTitle: string) => void
 }
 
 const TodoList = (props: TodoListPropsType) => {
@@ -48,6 +49,7 @@ const TodoList = (props: TodoListPropsType) => {
                 title={props.title}
                 removeTodolist={props.removeTodolist}
                 id={props.id}
+                updateTodolistTitle={props.updateTodolistTitle}
             />
 
             <AddItemForm

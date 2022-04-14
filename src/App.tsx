@@ -79,6 +79,10 @@ function App() {
         })
     }
 
+    const updateTodolistTitle = (todolistId: string, newTitle: string) => {
+
+    }
+
     const changeStatus = (todolistID: string, taskId: string, newIsDoneValue: boolean) => {
         setTasks({
             ...tasks,
@@ -123,6 +127,7 @@ function App() {
                         removeTodolist={removeTodolist}
                         updateTask={updateTask}
                         id={el.id}
+                        updateTodolistTitle={updateTodolistTitle}
                     />
                 )
             })}
