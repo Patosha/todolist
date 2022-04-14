@@ -24,7 +24,6 @@ const TodoListHeader = (props: TodoListHeaderPropsType) => {
                 title={props.title}
                 callBack={editableSpanForH3Handler}
             />
-            {/*{props.title}*/}
 
             <button onClick={removeTodolistHandler}>
                 X

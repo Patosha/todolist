@@ -80,7 +80,7 @@ function App() {
     }
 
     const updateTodolistTitle = (todolistId: string, newTitle: string) => {
-
+        setTodolists(todolists.map(el => el.id === todolistId ? {...el, title: newTitle} : el))
     }
 
     const changeStatus = (todolistID: string, taskId: string, newIsDoneValue: boolean) => {
