@@ -12,7 +12,7 @@ export type  TaskType = {
 }
 
 export type TodoListPropsType = {
-    todolistId: string
+    // todolistId: string
     title: string
     filter: FilterValuesType
     tasks: Array<TaskType>
@@ -21,22 +21,23 @@ export type TodoListPropsType = {
     changeFilter: (todolistId: string, filter: FilterValuesType) => void
     changeStatus: (todolistID: string, id: string, isDone: boolean) => void
     removeTodolist: (todolistID: string) => void
+    id: string
 }
 
 const TodoList = (props: TodoListPropsType) => {
 
     const onAllClickHandler = () => {
-        props.changeFilter(props.todolistId, 'all')
+        props.changeFilter(props.id, 'all')
     }
     const onActiveClickHandler = () => {
-        props.changeFilter(props.todolistId, 'active')
+        props.changeFilter(props.id, 'active')
     }
     const onCompletedClickHandler = () => {
-        props.changeFilter(props.todolistId, 'completed')
+        props.changeFilter(props.id, 'completed')
     }
 
     const addTaskHandler = (title: string) => {
-        props.addTask(title, props.todolistId)
+        props.addTask(props.id, title)
     }
 
     return (
@@ -45,18 +46,18 @@ const TodoList = (props: TodoListPropsType) => {
             <TodoListHeader
                 title={props.title}
                 removeTodolist={props.removeTodolist}
-                todolistID={props.todolistId}
+                id={props.id}
             />
 
             <AddItemForm
-                callBack={addTaskHandler}
+                addTaskHandler={addTaskHandler}
             />
 
             <TasksList
                 tasks={props.tasks}
                 removeTask={props.removeTasks}
                 changeStatus={props.changeStatus}
-                todolistID={props.todolistId}
+                id={props.id}
             />
 
             <div>

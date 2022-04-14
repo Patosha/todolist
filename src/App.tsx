@@ -56,21 +56,20 @@ function App() {
         setTasks({...tasks, [todolistID]: tasks[todolistID].filter((el) => el.id !== taskId)})
     }
 
-    const addTask = (todolistID: string, title: string) => {
-
-        const newTask: TaskType = {
+    const addTask = (todolistId: string, title: string) => {
+        let newTask: TaskType = {
             id: v1(),
             title,
             isDone: false
         }
-
-        setTasks({...tasks, [todolistID]: [newTask, ...tasks[todolistID]]})
+        setTasks({...tasks, [todolistId]: [newTask, ...tasks[todolistId]]})
     }
 
-    const addTodoList = () => {
-        const newId = v1()
-        const newTodoList: TodolistsType = {id: newId, title: 'What to buy', filter: 'all'}
+    const addTodoList = (newTitle: string) => {
+        const newTodoListId = v1()
+        const newTodoList: TodolistsType = {id: newTodoListId, title: newTitle, filter: 'all'}
         setTodolists([newTodoList, ...todolists])
+        setTasks({...tasks, [newTodoListId]: []})
     }
 
     const changeStatus = (todolistID: string, taskId: string, newIsDoneValue: boolean) => {
@@ -78,7 +77,6 @@ function App() {
             ...tasks,
             [todolistID]: tasks[todolistID].map(el => el.id === taskId ? {...el, isDone: newIsDoneValue} : el)
         })
-
     }
 
 //UI:
@@ -86,12 +84,12 @@ function App() {
         <div className="App">
 
             <AddItemForm
-                callBack={addTodoList}
+                addTaskHandler={addTodoList}
             />
 
             {todolists.map((el) => {
 
-                let tasksForTodoList = tasks[el.id];
+                let tasksForTodoList: Array<TaskType>;
 
                 switch (el.filter) {
                     case 'active':
@@ -107,7 +105,7 @@ function App() {
                 return (
                     <TodoList
                         key={el.id}
-                        todolistId={el.id}
+                        // todolistId={el.id}
                         title={el.title}
                         filter={el.filter}
                         tasks={tasksForTodoList}
@@ -116,6 +114,7 @@ function App() {
                         changeFilter={changeFilter}
                         changeStatus={changeStatus}
                         removeTodolist={removeTodolist}
+                        id={el.id}
                     />
                 )
             })}

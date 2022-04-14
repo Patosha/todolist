@@ -3,13 +3,13 @@ import React from 'react';
 type TodoListHeaderPropsType = {
     title: string
     removeTodolist: (todolistID: string) => void
-    todolistID: string
+    id: string
 }
 
 const TodoListHeader = (props: TodoListHeaderPropsType) => {
 
     const removeTodolistHandler = () => {
-        props.removeTodolist(props.todolistID)
+        props.removeTodolist(props.id)
     }
 
     return (

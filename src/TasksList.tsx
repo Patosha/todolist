@@ -5,7 +5,7 @@ type TaskListPropsType = {
     tasks: Array<TaskType>
     removeTask: (todolistID: string, id: string) => void
     changeStatus: (todolistID: string, id: string, isDone: boolean) => void
-    todolistID: string
+    id: string
 }
 
 const TasksList = (props: TaskListPropsType) => {
@@ -22,13 +22,13 @@ const TasksList = (props: TaskListPropsType) => {
                         <li key={t.id} className={t.isDone ? 'isDone' : ''}>
                             <input type="checkbox" checked={t.isDone}
                                    onChange={(e) =>
-                                       props.changeStatus(props.todolistID, t.id, e.currentTarget.checked)}
+                                       props.changeStatus(props.id, t.id, e.currentTarget.checked)}
                             />
 
                             <span>{t.title}</span>
 
                             <button onClick={() => {
-                                props.removeTask(props.todolistID, t.id)
+                                props.removeTask(props.id, t.id)
                             }}>
                                 X
                             </button>

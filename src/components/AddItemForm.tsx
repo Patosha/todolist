@@ -1,8 +1,8 @@
 import Button from "../Button";
-import React, {useState} from "react";
+import React, {ChangeEvent, useState} from "react";
 
 type AddItemFormPropsType = {
-    callBack: (title: string) => void
+    addTaskHandler: (title: string) => void
 }
 
 export const AddItemForm = (props: AddItemFormPropsType) => {
@@ -13,11 +13,21 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
     const addTask = () => {
         const trimmedTitle = title.trim()
         if (trimmedTitle) {
-            props.callBack(trimmedTitle)
+            props.addTaskHandler(trimmedTitle)
             // props.callBack(trimmedTitle)
             setTitle('')
         } else {
             setError(true)
+        }
+    }
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setTitle(e.currentTarget.value)
+        setError(false)
+
+    }
+    const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            addTask();
         }
     }
 
@@ -26,25 +36,15 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
 
             <input className={error ? 'error' : ''}
                    value={title}
-                   onChange={(e) => {
-                       setTitle(e.currentTarget.value)
-                       setError(false)
-                   }}
+                   onChange={onChangeHandler}
                 //клава
-                   onKeyPress={(e) => {
-                       if (e.key === 'Enter') {
-                           addTask()
-                       }
-
-                   }
-                   }
+                   onKeyPress={onKeyPressHandler}
             />
 
             <Button
                 title={'+'}
                 changeFilter={addTask}
             />
-
             {error && <div className={'error-message'}>Title is required!</div>}
         </div>
     )
