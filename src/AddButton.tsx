@@ -1,12 +1,13 @@
 import React from 'react';
 
+
 type ButtonPropsType = {
     title: string
     changeFilter: () => void
     btnClass?: string
 }
 
-const Button = (props: ButtonPropsType) => {
+export const AddButton = (props: ButtonPropsType) => {
     return (
         <button
             className={props.btnClass}
@@ -14,5 +15,3 @@ const Button = (props: ButtonPropsType) => {
         </button>
     )
 };
-
-export default Button;

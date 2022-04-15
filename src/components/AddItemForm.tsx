@@ -1,5 +1,5 @@
-import Button from "../Button";
 import React, {ChangeEvent, useState} from "react";
+import {AddButton} from "../AddButton";
 
 type AddItemFormPropsType = {
     addTaskHandler: (title: string) => void
@@ -14,7 +14,6 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
         const trimmedTitle = title.trim()
         if (trimmedTitle) {
             props.addTaskHandler(trimmedTitle)
-            // props.callBack(trimmedTitle)
             setTitle('')
         } else {
             setError(true)
@@ -41,10 +40,11 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
                    onKeyPress={onKeyPressHandler}
             />
 
-            <Button
+            <AddButton
                 title={'+'}
                 changeFilter={addTask}
             />
+
             {error && <div className={'error-message'}>Title is required!</div>}
         </div>
     )

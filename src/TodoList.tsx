@@ -1,7 +1,7 @@
 import React from 'react';
 import {FilterValuesType} from "./App";
 import TodoListHeader from "./TodoListHeader";
-import Button from "./Button";
+import {AddButton} from "./AddButton";
 import TasksList from "./TasksList";
 import {AddItemForm} from "./components/AddItemForm";
 
@@ -65,17 +65,17 @@ const TodoList = (props: TodoListPropsType) => {
             />
 
             <div>
-                <Button
+                <AddButton
                     btnClass={props.filter === 'all' ? 'btnActive' : ''}
                     changeFilter={onAllClickHandler}
                     title={"All"}
                 />
-                <Button
+                <AddButton
                     btnClass={props.filter === 'active' ? 'btnActive' : ''}
                     changeFilter={onActiveClickHandler}
                     title={"Active"}
                 />
-                <Button
+                <AddButton
                     btnClass={props.filter === 'completed' ? 'btnActive' : ''}
                     changeFilter={onCompletedClickHandler}
                     title={"Completed"}

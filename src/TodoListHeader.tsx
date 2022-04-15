@@ -1,5 +1,7 @@
 import React from 'react';
 import {EditableSpan} from "./components/EditableSpan";
+import {IconButton} from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 type TodoListHeaderPropsType = {
     title: string
@@ -7,6 +9,7 @@ type TodoListHeaderPropsType = {
     removeTodolist: (todolistID: string) => void
     updateTodolistTitle: (todolistId: string, newTitle: string) => void
 }
+
 
 const TodoListHeader = (props: TodoListHeaderPropsType) => {
 
@@ -25,9 +28,9 @@ const TodoListHeader = (props: TodoListHeaderPropsType) => {
                 callBack={editableSpanForH3Handler}
             />
 
-            <button onClick={removeTodolistHandler}>
-                X
-            </button>
+            <IconButton onClick={removeTodolistHandler} aria-label="delete" color="default">
+                <DeleteIcon />
+            </IconButton>
         </h3>
     );
 };
