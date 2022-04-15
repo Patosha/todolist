@@ -1,5 +1,6 @@
 import React, {ChangeEvent, useState} from "react";
 import {AddButton} from "../AddButton";
+import {Input} from "@mui/material";
 
 type AddItemFormPropsType = {
     addTaskHandler: (title: string) => void
@@ -33,7 +34,8 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
     return (
         <div>
 
-            <input className={error ? 'error' : ''}
+            <Input defaultValue="Hello world"
+                   className={error ? 'error' : ''}
                    value={title}
                    onChange={onChangeHandler}
                 //клава

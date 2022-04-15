@@ -10,7 +10,6 @@ type TodoListHeaderPropsType = {
     updateTodolistTitle: (todolistId: string, newTitle: string) => void
 }
 
-
 const TodoListHeader = (props: TodoListHeaderPropsType) => {
 
     const removeTodolistHandler = () => {
